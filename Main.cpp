@@ -45,10 +45,6 @@ int main(int argc, char* argv[]) {
 					x = x + 5;
 				if (state[SDL_SCANCODE_LEFT])
 					x = x - 5;
-				/*else if (left && up) {
-					x = x - 5;
-					y = y - 5;
-				}*/
 				if (state[SDL_SCANCODE_SPACE]) {
 					shot.x = rect.x + 25;
 					shot.y = rect.y + 15;
