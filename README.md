@@ -1,1 +1,1 @@
-My Awesome Game
+This is a test of a game
