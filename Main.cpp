@@ -11,7 +11,7 @@ int main(int argc, char* argv[]) {
 	SDL_Renderer* renderer;
 	rect.w = 50;
 	rect.h = 30;
-	//SDL_Event event;
+	SDL_Event event;
 	window = SDL_CreateWindow(
 		"Awesomw Game",
 		SDL_WINDOWPOS_CENTERED,
@@ -27,14 +27,19 @@ int main(int argc, char* argv[]) {
 	while (a == 1) {
 		rect.x = x;
 		rect.y = y;
-		SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
-		SDL_RenderClear(renderer);
-		SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-		SDL_RenderFillRect(renderer, &rect);
-		SDL_RenderPresent(renderer);
-
+		while (SDL_PollEvent(&event) != 0) {
+			if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE) {
+				a = 0;
+				SDL_DestroyWindow;
+			}
+				SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+				SDL_RenderClear(renderer);
+				SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+				SDL_RenderFillRect(renderer, &rect);
+				
+				SDL_RenderPresent(renderer);
 		//SDL_Delay(10);
 	}
-		SDL_Quit();
-		return 0;
+	SDL_Quit();
+	return 0;
 }
