@@ -14,8 +14,8 @@ int main(int argc, char* argv[]) {
 	rect.h = 30;
 	shot.w = 40;
 	shot.h = 5;
-	shot.x = 501;
 	SDL_Event event;
+	const Uint8 *state = SDL_GetKeyboardState(NULL);
 	window = SDL_CreateWindow(
 		"Awesomw Game",
 		SDL_WINDOWPOS_CENTERED,
@@ -30,21 +30,26 @@ int main(int argc, char* argv[]) {
 	while(a==1) {
 		rect.x = x;
 		rect.y = y;
+		
 		if (SDL_PollEvent(&event) != 0) {
 			if (event.window.event == SDL_WINDOWEVENT_CLOSE || event.key.keysym.scancode == SDL_SCANCODE_ESCAPE) {
 				a = 0;
 				SDL_DestroyWindow(window);
 			}
 			else{
-				if (event.key.keysym.scancode == SDL_SCANCODE_DOWN)
+				if (state[SDL_SCANCODE_DOWN])
 					y = y + 5;
-				if (event.key.keysym.scancode == SDL_SCANCODE_UP)
+				if (state[SDL_SCANCODE_UP])
 					y = y - 5;
-				if (event.key.keysym.scancode == SDL_SCANCODE_RIGHT)
+				if (state[SDL_SCANCODE_RIGHT])
 					x = x + 5;
-				if (event.key.keysym.scancode == SDL_SCANCODE_LEFT)
+				if (state[SDL_SCANCODE_LEFT])
 					x = x - 5;
-				if (event.key.keysym.scancode == SDL_SCANCODE_SPACE) {
+				/*else if (left && up) {
+					x = x - 5;
+					y = y - 5;
+				}*/
+				if (state[SDL_SCANCODE_SPACE]) {
 					shot.x = rect.x + 25;
 					shot.y = rect.y + 15;
 				}	
