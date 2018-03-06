@@ -24,6 +24,8 @@ int main(int argc, char* argv[]) {
 	
 	rect.w = 793/5;
 	rect.h = 1007/5;
+	rect.x = 50;
+	rect.y = 50;
 	shot.w = 50;
 	shot.h = 50;
 	SDL_Event event;
@@ -42,14 +44,14 @@ int main(int argc, char* argv[]) {
 	SDL_Texture* goku_tx = SDL_CreateTextureFromSurface(renderer, goku);
 	back_tx = SDL_CreateTextureFromSurface(renderer, background);
 	SDL_Texture* shoot_tx = SDL_CreateTextureFromSurface(renderer, shoot);
-	bool movUp = true;
-	bool movDown = true;
-	bool movLeft = true;
-	bool movRight = true;
+	bool movUp = false;
+	bool movDown = false;
+	bool movLeft = false;
+	bool movRight = false;
 
 	while(a==1) {
-		rect.x = x;
-		rect.y = y;
+		//rect.x = x;
+		//rect.y = y;
 		
 		if (SDL_PollEvent(&event) != 0) {
 			if (event.window.event == SDL_WINDOWEVENT_CLOSE || event.key.keysym.scancode == SDL_SCANCODE_ESCAPE) {
@@ -73,26 +75,23 @@ int main(int argc, char* argv[]) {
 						break;
 					}
 				}
-				else if (event.key.type == SDL_KEYUP) {
+				if (event.key.type == SDL_KEYUP) {
 					switch (event.key.keysym.scancode) {
 					case SDL_SCANCODE_UP:
-						isMoving = false;
+						movUp = false;
 						break;
 					case SDL_SCANCODE_RIGHT:
-						rect.x += 5;
+						movRight = false;
 						break;
 					case SDL_SCANCODE_DOWN:
-						rect.y += 5;
+						movDown = false;
 						break;
 					case SDL_SCANCODE_LEFT:
-						rect.x -= 5;
+						movLeft = false;
 						break;
 					}
 				}
-				rect.y -= 5;
-				rect.x += 5;
-				rect.y += 5;
-				rect.x -= 5;
+				
 				/*if (state[SDL_SCANCODE_DOWN])
 					y = y + 5;
 				if (state[SDL_SCANCODE_UP])
@@ -106,6 +105,18 @@ int main(int argc, char* argv[]) {
 					shot.y = rect.y + 15;
 				}	*/
 			}
+		}
+		if (movUp == true) {
+			rect.y--;
+		}
+		if (movDown == true) {
+			rect.y++;
+		}
+		if (movLeft == true) {
+			rect.x--;
+		}
+		if (movRight == true) {
+			rect.x++;
 		}
 		SDL_RenderClear(renderer);
 		SDL_RenderCopy(renderer, back_tx, 0, 0);
