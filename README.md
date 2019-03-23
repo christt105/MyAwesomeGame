@@ -1,1 +1,1 @@
-This is a test of a game
+My first game test with SDL library
